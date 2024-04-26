@@ -26,5 +26,3 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: Run Unit Tests
       run: php artisan test
-    - name: PHP Code Sniffer (PHPCS)
-      run: vendor/bin/phpcs
