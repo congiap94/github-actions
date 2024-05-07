@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/hello', function () {
-    return 'Hello, world!';
+    return 'Hello, world! Test Jenkins';
 });
