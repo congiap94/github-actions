@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+  labels:
+    app: laravel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+      - name: laravel-app
+        image: php:8.1-apache
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: laravel-code
+          mountPath: /var/www/html
+        env:
+        - name: APP_ENV
+          value: production
+        - name: APP_DEBUG
+          value: "false"
+        - name: APP_KEY
+          valueFrom:
+            secretKeyRef:
+              name: laravel-secret
+              key: APP_KEY
+      volumes:
+      - name: laravel-code
+        gitRepo:
+          repository: https://github.com/congiap94/github-actions.git
+          revision: main
